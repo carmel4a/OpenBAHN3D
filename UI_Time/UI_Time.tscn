@@ -1,0 +1,369 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://UI_Utils/PopupMenuButton_a.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends WindowDialog
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+var local_date = null
+onready var _buttons = get_node(\"Margin/Time and Speed/Time/MarginContainer/VBoxContainer/Buttons\")
+
+func _ready():
+	pass
+#	for s in System.Map.day_names:
+#		_buttons.get_node(\"Day\").Popup_.add_item(s)
+#	show_()
+
+func show_():
+	
+	local_date = System.Map.time
+	_buttons.get_node(\"Day\").set_text(System.Map.day_names[local_date[0]])
+	_buttons.get_node(\"h\").set_text(local_date[1])
+	_buttons.get_node(\"m\").set_text(local_date[2])
+	_buttons.get_node(\"s\").set_text(local_date[3])
+	show()
+	popup()
+
+func _day_changed(id):
+	
+	"
+
+[node name="UI_Time" type="WindowDialog"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 22.0
+margin/right = 349.0
+margin/bottom = 294.0
+popup/exclusive = false
+window/title = "Time"
+script/script = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Time and Speed" type="VBoxContainer" parent="Margin"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 3
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 339.0
+margin/bottom = 262.0
+alignment = 0
+
+[node name="Time" type="VBoxContainer" parent="Margin/Time and Speed"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 1
+margin/left = 0.0
+margin/top = 22.0
+margin/right = 329.0
+margin/bottom = 102.0
+alignment = 0
+
+[node name="TimeLabel" type="Label" parent="Margin/Time and Speed/Time"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 329.0
+margin/bottom = 14.0
+text = "Change Time"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/Time and Speed/Time"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 18.0
+margin/right = 329.0
+margin/bottom = 80.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Time and Speed/Time/MarginContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 15.0
+margin/top = 0.0
+margin/right = 329.0
+margin/bottom = 62.0
+alignment = 0
+
+[node name="Label" type="Label" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 314.0
+margin/bottom = 14.0
+text = "Warning: that may shit up the game."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 18.0
+margin/right = 314.0
+margin/bottom = 38.0
+alignment = 1
+
+[node name="Day" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer/Buttons" instance=ExtResource( 1 )]
+
+margin/right = 75.0
+Text = "a"
+
+[node name="h" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer/Buttons" instance=ExtResource( 1 )]
+
+margin/left = 79.0
+margin/right = 154.0
+
+[node name="m" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer/Buttons" instance=ExtResource( 1 )]
+
+margin/left = 158.0
+margin/right = 233.0
+
+[node name="s" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer/Buttons" instance=ExtResource( 1 )]
+
+margin/left = 237.0
+margin/right = 314.0
+
+[node name="Confirm" type="Button" parent="Margin/Time and Speed/Time/MarginContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 42.0
+margin/right = 314.0
+margin/bottom = 62.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Confirm"
+flat = false
+
+[node name="Speed" type="VBoxContainer" parent="Margin/Time and Speed"]
+
+editor/display_folded = true
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 1
+margin/left = 0.0
+margin/top = 150.0
+margin/right = 329.0
+margin/bottom = 230.0
+alignment = 0
+
+[node name="Label" type="Label" parent="Margin/Time and Speed/Speed"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 329.0
+margin/bottom = 14.0
+text = "Change Time"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="MarginContainer" type="MarginContainer" parent="Margin/Time and Speed/Speed"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 18.0
+margin/right = 329.0
+margin/bottom = 80.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Time and Speed/Speed/MarginContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 15.0
+margin/top = 0.0
+margin/right = 329.0
+margin/bottom = 62.0
+alignment = 0
+
+[node name="Label" type="Label" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 314.0
+margin/bottom = 14.0
+text = "Warning, bla bla bal"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 18.0
+margin/right = 314.0
+margin/bottom = 38.0
+alignment = 0
+
+[node name="MenuButton" type="MenuButton" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 19.0
+margin/bottom = 20.0
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "a"
+flat = true
+items = [  ]
+
+[node name="MenuButton1" type="MenuButton" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 23.0
+margin/top = 0.0
+margin/right = 43.0
+margin/bottom = 20.0
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "b"
+flat = true
+items = [  ]
+
+[node name="MenuButton2" type="MenuButton" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 47.0
+margin/top = 0.0
+margin/right = 66.0
+margin/bottom = 20.0
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "c"
+flat = true
+items = [  ]
+
+[node name="MenuButton3" type="MenuButton" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer/HBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 70.0
+margin/top = 0.0
+margin/right = 90.0
+margin/bottom = 20.0
+toggle_mode = false
+click_on_press = true
+enabled_focus_mode = 0
+shortcut = null
+text = "d"
+flat = true
+items = [  ]
+
+[node name="Button" type="Button" parent="Margin/Time and Speed/Speed/MarginContainer/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 42.0
+margin/right = 314.0
+margin/bottom = 62.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Ok"
+flat = false
+
+
